@@ -1,8 +1,10 @@
 var mongoose = require('mongoose');
 
-var noteSchema = new mongoose.Schema({
-  noteBody: String,
-  author: {type: String, default: 'Anonymous'}
+var nflSchema = new mongoose.Schema({
+  team: String,
+  playerName: String,
+  position: String,
+  number: Number
 });
 
-module.exports = mongoose.model('Note', noteSchema);
+module.exports = mongoose.model('nfl', nflSchema);

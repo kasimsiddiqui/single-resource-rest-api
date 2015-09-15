@@ -4,13 +4,13 @@ var chai = require('chai');
 var chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 var expect = chai.expect;
-process.env.MONGO_URL = 'mongodb://localhost/notes_test';
+process.env.MONGO_URL = 'mongodb://localhost/nfl_test';
 require(__dirname + '/../server.js');
 var mongoose = require('mongoose');
 var url = 'localhost:3000/api';
-var Note = require(__dirname + '/../models/note');
+var Nfl = require(__dirname + '/../models/nfl');
 
-describe('the notes resource', function() {
+describe('the nfl resource', function() {
   after(function(done) {
     mongoose.connection.db.dropDatabase(function(err) {
       if (err) throw err;
@@ -18,9 +18,9 @@ describe('the notes resource', function() {
     });
   });
 
-  it('should be able to get notes', function(done) {
+  it('should be able to get to nfl', function(done) {
     chai.request(url)
-      .get('/notes')
+      .get('/nfl')
       .end(function(err, res) {
         expect(err).to.eql(null);
         expect(Array.isArray(res.body)).to.eql(true);
@@ -28,42 +28,42 @@ describe('the notes resource', function() {
       });
   });
 
-  it('should be able to create a note', function(done) {
+  it('should be able to create a nfl player', function(done) {
     chai.request(url)
-      .post('/notes')
-      .send({noteBody: 'test note'})
+      .post('/nfl')
+      .send({team: 'seahawks', playerName: 'marshawn lynch'})
       .end(function(err, res) {
         expect(err).to.eql(null);
-        expect(res.body.noteBody).to.eql('test note');
-        expect(res.body.author).to.eql('Anonymous');
+        expect(res.body.team).to.eql('seahawks');
+        expect(res.body.playerName).to.eql('marshawn lynch');
         done();
       });
   });
 
-  describe('routes that need a note in the database', function() {
+  describe('routes that need a nfl player in the database', function() {
     beforeEach(function(done) {
-      var testNote = new Note({noteBody: 'test'});
-      testNote.save(function(err, data) {
+      var testNfl = new Note({team: 'seahawks', playerName: 'marshawn lynch'});
+      testNfl.save(function(err, data) {
         if (err) throw err;
-        this.testNote = data;
+        this.testNfl = data;
         done();
       }.bind(this));
     });
 
-   it('should be able to update a note', function(done) {
+   it('should be able to update a nfl player', function(done) {
       chai.request(url)
-        .put('/notes/' + this.testNote._id)
-        .send({noteBody: 'new noteBody'})
+        .put('/nfl/' + this.testNfl._id)
+        .send(playerName: 'russell wilson')
         .end(function(err, res) {
           expect(err).to.eql(null);
-          expect(res.body.msg).to.eql('success');
+          expect(res.body.playerName).to.eql('russell wilson');
           done();
         });
    });
 
-   it('should be able to delete a note', function(done) {
+   it('should be able to delete a player', function(done) {
       chai.request(url)
-        .delete('/notes/' + this.testNote._id)
+        .delete('/nfl/' + this.testNfl._id)
         .end(function(err, res) {
           expect(err).to.eql(null);
           expect(res.body.msg).to.eql('success');
