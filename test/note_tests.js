@@ -42,7 +42,7 @@ describe('the nfl resource', function() {
 
   describe('routes that need a nfl player in the database', function() {
     beforeEach(function(done) {
-      var testNfl = new Note({team: 'seahawks', playerName: 'marshawn lynch'});
+      var testNfl = new Nfl({team: 'seahawks', playerName: 'marshawn lynch'});
       testNfl.save(function(err, data) {
         if (err) throw err;
         this.testNfl = data;
@@ -53,10 +53,10 @@ describe('the nfl resource', function() {
    it('should be able to update a nfl player', function(done) {
       chai.request(url)
         .put('/nfl/' + this.testNfl._id)
-        .send(playerName: 'russell wilson')
+        .send({playerName: 'russell wilson'})
         .end(function(err, res) {
           expect(err).to.eql(null);
-          expect(res.body.playerName).to.eql('russell wilson');
+          expect(res.body.msg).to.eql('success');
           done();
         });
    });

@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 
 var nflSchema = new mongoose.Schema({
-  team: String,
-  playerName: String,
+  team: {type:String, required:true},
+  playerName: {type:String, required:true},
   position: String,
   number: Number
 });
