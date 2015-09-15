@@ -8,7 +8,7 @@ mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/nfl');
 
 
 var nflRouter = require(__dirname + '/routes/nfl_routes');
-app.use('/api', notesRouter);
+app.use('/api', nflRouter);
 
 app.listen(port, function() {
   console.log('Server running on port ' + port);
