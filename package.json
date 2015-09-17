@@ -6,7 +6,9 @@
   "dependencies": {
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
-    "mongoose": "^4.1.7"
+    "mongoose": "^4.1.7",
+    "bcrypt": "^0.8.5",
+    "eat": "^0.1.1"
   },
   "devDependencies": {
     "chai": "^3.2.0",
