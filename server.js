@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/nfl_dev');
 process.env.APP_SECRET = process.env.APP_SECRET || 'changemechangemechangeme';
 
+app.use(express.static(__dirname + '/build'));
 var nflRoute = require(__dirname + '/routes/nfl_routes');
 var usersRouter = require(__dirname + '/routes/users_routes');
 app.use('/api', nflRoute);
