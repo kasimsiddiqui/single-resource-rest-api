@@ -18,7 +18,7 @@ gulp.task('staticfiles:dev', function() {
 });
 
 gulp.task('watch', function () {
-  return gulp.watch(['index.js', 'bin/greet', 'test/**/*test.js', 'lib/**/*.js'], ['build:dev']);
+  return gulp.watch(['./app/**/*.html', './app/js/client.js'], ['build:dev']);
 });
 
 gulp.task('build:dev', ['staticfiles:dev', 'webpack:dev']);
