@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var webpack = require('webpack-stream');
+var watch = require('gulp-watch');
 
 gulp.task('webpack:dev', function() {
   return gulp.src('./app/js/client.js')
@@ -16,9 +17,8 @@ gulp.task('staticfiles:dev', function() {
     .pipe(gulp.dest('build/'))
 });
 
-gulp.task('test', function() {
-  return gulp.src('test/**/*tests.js')
-    .pipe(gulpMocha({reporter: 'nyan'}));
+gulp.task('watch', function () {
+  return gulp.watch(['./app/**/*.html', './app/js/client.js'], ['build:dev']);
 });
 
 gulp.task('build:dev', ['staticfiles:dev', 'webpack:dev']);
