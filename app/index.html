@@ -1,15 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title></title>
+	<meta charset="UTF-8">
+	<title></title>
 </head>
-<body data-ng-app="nflApp">
-  <main data-ng-controller="nflController">
-    <h1>this app does nothing</h1>
-    <h1>{{greeting}}</h1>
-    <input type="text" data-ng-model="greeting">
+<body data-ng-app="notesApp">
+  <main data-ng-controller="NotesController" data-ng-init="getAll()">
+    <h1>NFL Players</h1>
+    <form name="newNoteForm" data-ng-submit="createNote(newNote)">
+      <label for="noteBody">New NFL Player:
+        <input type="text" required data-ng-model="newNote.noteBody">
+      </label>
+      <button type="submit" data-ng-disabled="newNoteForm.$invalid">Create New Nfl Player</button>
+    </form>
+
+    <ul id="noteslist">
+    	<li class="{{note.status}}" data-ng-repeat="note in notes">
+        <span data-ng-if="!note.editing">{{note.noteBody}}
+          <button data-ng-click="note.editing = true">Edit</button>
+          <button data-ng-click="removeNote(note)">Delete</button>
+        </span>
+        <form data-ng-if="note.editing" name="{{'noteForm' + note._id}}" data-ng-submit="updateNote(note)">
+          <input type="text" data-ng-model="note.noteBody">
+          <button type="submit">Save Changes</button>
+        </form>
+        <button data-ng-if="!note.editing" data-ng-click="note.editing = false">Cancel</button>
+      </li>
+    </ul>
   </main>
-  <script src="bundle.js"></script>
+	<script src="bundle.js"></script>
 </body>
 </html>
