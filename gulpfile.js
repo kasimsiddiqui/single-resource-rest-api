@@ -16,5 +16,10 @@ gulp.task('staticfiles:dev', function() {
     .pipe(gulp.dest('build/'))
 });
 
+gulp.task('test', function() {
+  return gulp.src('test/**/*tests.js')
+    .pipe(gulpMocha({reporter: 'nyan'}));
+});
+
 gulp.task('build:dev', ['staticfiles:dev', 'webpack:dev']);
 gulp.task('default', ['build:dev']);
