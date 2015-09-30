@@ -1,7 +1,9 @@
+'use strict';
+
 require('angular/angular');
 
-var notesApp = angular.module('nflApp', []);
+var notesApp = angular.module('notesApp', []);
 
-notesApp.controller('nflController', ['$scope', function($scope) {
-  $scope.greeting = 'hello world';
-}]);
+require('./services/resources_services')(notesApp);
+
+require('./notes/controllers/notes_controller')(notesApp);

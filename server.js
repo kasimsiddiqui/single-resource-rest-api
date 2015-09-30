@@ -1,14 +1,11 @@
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
-mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/nfl_dev');
-process.env.APP_SECRET = process.env.APP_SECRET || 'changemechangemechangeme';
+mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/notes_dev');
 
 app.use(express.static(__dirname + '/build'));
-var nflRoute = require(__dirname + '/routes/nfl_routes');
-var usersRouter = require(__dirname + '/routes/users_routes');
-app.use('/api', nflRoute);
-app.use('/api', usersRouter);
+var notesRouter = require(__dirname + '/routes/notes_routes');
+app.use('/api', notesRouter);
 
 var port = process.env.PORT || 3000;
 app.listen(port, function() {

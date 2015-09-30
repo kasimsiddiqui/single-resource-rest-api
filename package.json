@@ -1,21 +1,18 @@
 {
-  "name": "single-resource-rest-api",
+  "name": "single-resource-res-api",
   "version": "0.1.0",
-  "description": "single-resource-rest-api",
+  "description": "single-resource-res-api",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
-    "mongoose": "^4.1.7",
-    "bcrypt": "^0.8.5",
-    "eat": "^0.1.1"
+    "mongoose": "^4.1.7"
   },
   "devDependencies": {
     "angular": "^1.4.6",
     "chai": "^3.2.0",
     "chai-http": "^1.0.0",
     "gulp": "^3.9.0",
-    "gulp-watch": "^4.3.5",
     "mocha": "^2.3.2",
     "webpack-stream": "^2.1.1"
   },
