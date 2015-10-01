@@ -5,10 +5,10 @@ var chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 var expect = chai.expect;
 process.env.MONGO_URL = 'mongodb://localhost/notes_test';
-require(__dirname + '/../server.js');
+require(__dirname + '/../../server.js');
 var mongoose = require('mongoose');
 var url = 'localhost:3000/api';
-var Note = require(__dirname + '/../models/note');
+var Note = require(__dirname + '/../../models/note');
 
 describe('the notes resource', function() {
   after(function(done) {
