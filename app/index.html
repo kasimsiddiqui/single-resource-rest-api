@@ -5,14 +5,12 @@
     <title>NFL Players</title>
   </head>
   <body data-ng-app="notesApp">
-
     <main data-ng-controller="notesController" data-ng-init="getAll()">
       <h1>NFL Players</h1>
       <form name="newNoteForm" data-ng-submit="createNewNote(note)">
         <input type="text" required data-ng-model="note.noteBody">
         <button type="submit" data-ng-disabled="newNoteForm.$invalid">Create New NFL Player</button>
       </form>
-
       <ul data-ng-repeat="note in notes">
         <li>{{note.noteBody}}
             <button data-ng-disabled="!note._id" data-ng-click="removeNote(note)">Delete</button>

@@ -1,33 +1,44 @@
 'use strict';
 
 module.exports = function(app) {
-  app.controller('notesController', ['$scope', 'resource', function($scope, resource) {
+  app.controller('notesController', ['$scope', '$http', function($scope, $http) {
     $scope.notes = [];
 
-    var Note = resource('notes');
-
     $scope.getAll = function() {
-      Note.getAll(function(data) {
-        $scope.notes = data;
-      });
+      $http.get('/api/notes')
+        .then(function(res){
+          $scope.notes = res.data;
+        }, function(res) {
+          console.log(res);
+        });
     };
 
     $scope.createNewNote = function(note) {
-      Note.create(note, function(data) {
-        $scope.notes.push(data);
-      });
+      $http.post('/api/notes', note)
+        .then(function(res){
+          $scope.notes.push(res.data);
+          $scope.note = {};
+        }, function(res) {
+          console.log(res);
+        });
     };
 
     $scope.removeNote = function(note) {
-      Note.remove(note, function(data) {
-        $scope.notes.splice($scope.notes.indexOf(note), 1);
-      });
+      $http.delete('api/notes/' + note._id)
+        .then(function(res){
+          $scope.notes.splice($scope.notes.indexOf(note), 1);
+        }, function(res) {
+          console.log(res);
+        });
     };
 
     $scope.saveNote = function(note) {
-      Note.save(note, function(data) {
-        note.editing = false;
-       });
+      $http.put('api/notes/' + note._id, note)
+        .then(function(res){
+          note.editing = false;
+        }, function(res) {
+          console.log(res);
+        });
     };
 
     $scope.editCancel = function(note) {
