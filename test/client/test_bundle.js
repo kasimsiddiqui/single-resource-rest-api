@@ -54,7 +54,7 @@
 	'use strict';
 
 	__webpack_require__(2);
-	__webpack_require__(6);
+	__webpack_require__(5);
 
 	describe('notes controller', function() {
 	  var $httpBackend;
@@ -68,7 +68,7 @@
 	    $ControllerConstructor = $controller;
 	  }));
 
-	  it('should create a controller', function() {
+	  it('should be able to create a controller', function() {
 	    var notesController = $ControllerConstructor('notesController', {$scope: $scope});
 	    expect(typeof notesController).toBe('object');
 	    expect(Array.isArray($scope.notes)).toBe(true);
@@ -147,8 +147,6 @@
 	var notesApp = angular.module('notesApp', []);
 
 	__webpack_require__(4)(notesApp);
-
-	__webpack_require__(5)(notesApp);
 
 
 /***/ },
@@ -29067,89 +29065,44 @@
 	'use strict';
 
 	module.exports = function(app) {
-		var handleError = function(data) {
-			console.log(data);
-		};
-
-		app.factory('resource', ['$http', function($http) {
-			return function(resourceName) {
-				return {
-					getAll: function(callback) {
-						$http({
-							method: 'GET',
-							url: '/api/' + resourceName
-						})
-						.success(callback)
-						.error(handleError);
-					},
-
-					create: function(resource, callback) {
-						$http({
-							method: 'POST',
-							url: '/api/' + resourceName,
-							data: resource
-						})
-						.success(callback)
-						.error(handleError);
-					},
-
-					save: function(resource, callback) {
-						$http({
-							method: 'PUT',
-							url: '/api/' + resourceName + '/' + resource._id,
-							data: resource
-						})
-						.success(callback)
-						.error(handleError);
-					},
-
-					remove: function(resource, callback) {
-						$http({
-							method: 'DELETE',
-							url: '/api/' + resourceName + '/' + resource._id
-						})
-						.success(callback)
-						.error(handleError);
-					}
-				};
-			};
-		}]);
-	};
-
-/***/ },
-/* 5 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	module.exports = function(app) {
-	  app.controller('notesController', ['$scope', 'resource', function($scope, resource) {
+	  app.controller('notesController', ['$scope', '$http', function($scope, $http) {
 	    $scope.notes = [];
 
-	    var Note = resource('notes');
-
 	    $scope.getAll = function() {
-	      Note.getAll(function(data) {
-	        $scope.notes = data;
-	      });
+	      $http.get('/api/notes')
+	        .then(function(res){
+	          $scope.notes = res.data;
+	        }, function(res) {
+	          console.log(res);
+	        });
 	    };
 
 	    $scope.createNewNote = function(note) {
-	      Note.create(note, function(data) {
-	        $scope.notes.push(data);
-	      });
+	      $http.post('/api/notes', note)
+	        .then(function(res){
+	          $scope.notes.push(res.data);
+	          $scope.note = {};
+	        }, function(res) {
+	          console.log(res);
+	        });
 	    };
 
 	    $scope.removeNote = function(note) {
-	      Note.remove(note, function(data) {
-	        $scope.notes.splice($scope.notes.indexOf(note), 1);
-	      });
+	      $http.delete('/api/notes/' + note._id)
+	        .then(function(res){
+	          $scope.notes.splice($scope.notes.indexOf(note), 1);
+	        }, function(res) {
+	          console.log(res);
+	        });
 	    };
 
 	    $scope.saveNote = function(note) {
-	      Note.save(note, function(data) {
-	        note.editing = false;
-	       });
+	      $http.put('/api/notes/' + note._id, note)
+	        .then(function(res){
+	          note.editing = false;
+	        }, function(res) {
+	          console.log(res);
+	        });
 	    };
 
 	    $scope.editCancel = function(note) {
@@ -29168,7 +29121,7 @@
 
 
 /***/ },
-/* 6 */
+/* 5 */
 /***/ function(module, exports) {
 
 	/**
