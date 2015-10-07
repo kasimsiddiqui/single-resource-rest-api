@@ -14,11 +14,11 @@
         <button type="submit" data-ng-disabled="newNoteForm.$invalid">Create New NFL Player</button>
       </form>
 
-    <!-- <div data-note-form save="createNewNote(note)"
+    <div data-note-form save="createNewNote(note)"
          data-note="newNote"
          data-label-text="New Note"
          data-button-text="Create Note">
-      </div> -->
+      </div>
 
       <ul data-ng-repeat="note in notes">
         <li>{{note.noteBody}}
@@ -31,13 +31,13 @@
               <button type="button" data-ng-click="editCancel(note)">Cancel</button>
             </form>
 
-        <!-- <div data-note-form
+        <div data-note-form
              data-ng-if="note.editing"
              data-label-text="Edit Note"
              data-button-text="Save Changes"
              data-note="note"
              data-save="updateNote(note)">
-        </div> -->
+        </div>
 
         </li>
       </ul>
