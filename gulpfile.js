@@ -54,7 +54,7 @@ gulp.task('test', function() {
 });
 
 gulp.task('watch', function () {
-  return gulp.watch(['server', 'app/js/**/*.js'], ['build:dev']);
+  return gulp.watch(['server', 'app/**/*'], ['build:dev']);
 });
 
 gulp.task('build:dev', ['staticfiles:dev', 'webpack:dev']);

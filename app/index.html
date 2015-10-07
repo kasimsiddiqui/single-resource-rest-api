@@ -8,20 +8,37 @@
 
     <main data-ng-controller="notesController" data-ng-init="getAll()">
       <h1>NFL Players</h1>
+
       <form name="newNoteForm" data-ng-submit="createNewNote(note)">
         <input type="text" required data-ng-model="note.noteBody">
         <button type="submit" data-ng-disabled="newNoteForm.$invalid">Create New NFL Player</button>
       </form>
 
+    <!-- <div data-note-form save="createNewNote(note)"
+         data-note="newNote"
+         data-label-text="New Note"
+         data-button-text="Create Note">
+      </div> -->
+
       <ul data-ng-repeat="note in notes">
         <li>{{note.noteBody}}
             <button data-ng-disabled="!note._id" data-ng-click="removeNote(note)">Delete</button>
             <button data-ng-if="!note.editing" data-ng-disabled="!note._id" data-ng-click="editCancel(note)">Edit</button>
+
             <form name="{{'editing' + note._id}}" data-ng-if="note.editing" data-ng-submit="saveNote(note)">
               <input type="text" data-ng-model="note.noteBody">
               <button type="submit">Save Changes</button>
               <button type="button" data-ng-click="editCancel(note)">Cancel</button>
             </form>
+
+        <!-- <div data-note-form
+             data-ng-if="note.editing"
+             data-label-text="Edit Note"
+             data-button-text="Save Changes"
+             data-note="note"
+             data-save="updateNote(note)">
+        </div> -->
+
         </li>
       </ul>
     </main>
