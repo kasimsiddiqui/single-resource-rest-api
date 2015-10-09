@@ -4,6 +4,7 @@ var jsonParser = require('body-parser').json();
 var handleError = require(__dirname + '/../lib/handle_error');
 var httpBasic = require(__dirname + '/../lib/http_basic');
 var EventEmitter = require('events').EventEmitter;
+var eatAuth = require(__dirname + '/../lib/eat_auth');
 var ee = new EventEmitter();
 
 var usersRouter = module.exports = exports = express.Router();
@@ -69,4 +70,8 @@ ee.on('generateToken', function(req, res, user){
     if (err) return handleError(err, res);
     res.json({token: token});
   });
+});
+
+usersRouter.get('/username', jsonParser, eatAuth, function(req, res) {
+  res.json({username: req.user.username});
 });
