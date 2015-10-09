@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Thu Oct 01 2015 08:45:12 GMT-0700 (PDT)
+// Generated on Wed Sep 30 2015 13:39:04 GMT+0000 (UTC)
 
 module.exports = function(config) {
   config.set({
@@ -15,7 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'test/client/test_bundle.js'
+      './test/client/test_bundle.js'
     ],
 
 
@@ -60,6 +60,6 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true
+    singleRun: true 
   })
 }

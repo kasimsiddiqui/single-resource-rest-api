@@ -1,4 +1,6 @@
-
+p{
+  color:white;
+}
 
 h1{
   color:white;
@@ -6,6 +8,15 @@ h1{
 
 li{
   color:white;
+}
+
+form{
+  color:white;
+}
+
+a{
+  color:white;
+  text-decoration: none;
 }
 
 html {

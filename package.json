@@ -1,18 +1,21 @@
 {
   "name": "single-resource-res-api",
   "version": "0.1.0",
-  "description": "single-resource-res-api",
-  "main": "server.js",
+  "description": "",
+  "main": "index.js",
   "dependencies": {
-    "body-parser": "^1.13.3",
-    "express": "^4.13.3",
-    "mongoose": "^4.1.7",
     "bcrypt": "^0.8.5",
-    "eat": "^0.1.1"
+    "body-parser": "^1.13.3",
+    "eat": "^0.1.1",
+    "express": "^4.13.3",
+    "mongoose": "^4.1.7"
   },
   "devDependencies": {
-    "angular": "^1.4.6",
+    "angular": "^1.4.7",
+    "angular-base64": "^2.0.5",
+    "angular-cookies": "^1.4.7",
     "angular-mocks": "^1.4.7",
+    "angular-route": "^1.4.7",
     "chai": "^3.2.0",
     "chai-http": "^1.0.0",
     "gulp": "^3.9.0",

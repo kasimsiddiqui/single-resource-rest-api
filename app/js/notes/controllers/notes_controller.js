@@ -1,34 +1,40 @@
-'use strict';
-
 module.exports = function(app) {
-  app.controller('notesController', ['$scope', 'resource', function($scope, resource) {
-    $scope.notes = [];
+  app.controller('NotesController', ['$scope', 'Resource', '$http', '$cookies', '$location', function($scope, Resource, $http, $cookies, $location) {
 
-    var Note = resource('notes');
+    var eat = $cookies.get('eat');
+    if (!(eat && eat.length))
+      $location.path('/signup');
+
+    $http.defaults.headers.common.token = eat;
+    $scope.notes = [];
+    $scope.newNote = {};
+    var noteResource = Resource('notes');
+    $scope.description= 'this is our app, there are many like it but this one is ours';
+
+    $scope.printDescription = function(description) {
+      console.log('from the function: ' + description);
+      console.log('from $scope: ' + $scope.description);
+    };
 
     $scope.getAll = function() {
-      Note.getAll(function(data) {
+      noteResource.getAll(function(err, data) {
+        if (err) return console.log(err);
         $scope.notes = data;
       });
     };
 
-    $scope.createNewNote = function(note) {
-      Note.create(note, function(data) {
+    $scope.createNote = function(note) {
+      noteResource.create(note, function(err, data) {
+        if(err) return console.log(err);
+        $scope.newNote = {};
         $scope.notes.push(data);
-        $scope.note = {};
-      });
-    };
-
-    $scope.removeNote = function(note) {
-      Note.remove(note, function(data) {
-        $scope.notes.splice($scope.notes.indexOf(note), 1);
       });
     };
 
     $scope.saveNote = function(note) {
-      Note.save(note, function(data) {
-        note.editing = false;
-       });
+      note.editing = false;
+      Note.save(note, function(err, data) {
+      });
     };
 
     $scope.editCancel = function(note) {
@@ -42,5 +48,11 @@ module.exports = function(app) {
       }
     };
 
+    $scope.removeNote = function(note) {
+      noteResource.remove(note, function(err) {
+        if (err) return console.log(err);
+        $scope.notes.splice($scope.notes.indexOf(note), 1);
+      });
+    };
   }]);
 };

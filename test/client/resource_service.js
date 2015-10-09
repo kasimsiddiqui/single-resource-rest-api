@@ -23,6 +23,6 @@ describe('resource service', function() {
       expect(err).toBe(null);
       expect(Array.isArray(data)).toBe(true);
     });
-    $httpBackend.flush();
+    $httpBackend.flush(); 
   });
 });

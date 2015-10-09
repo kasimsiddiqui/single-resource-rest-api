@@ -1,37 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>NFL Players</title>
-  </head>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
 <link rel="stylesheet" href="nyan.css">
-    <div data-nyan></div>
-
-  <body data-ng-app="notesApp">
-
-    <main data-ng-controller="notesController" data-ng-init="getAll()">
-      <h1>NFL Players</h1>
-
-      <form name="newNoteForm" data-ng-submit="createNewNote(note)">
-        <input type="text" required data-ng-model="note.noteBody">
-        <button type="submit" data-ng-disabled="newNoteForm.$invalid">Create New NFL Player</button>
-      </form>
-
-      <ul data-ng-repeat="note in notes">
-        <li>{{note.noteBody}}
-            <button data-ng-disabled="!note._id" data-ng-click="removeNote(note)">Delete</button>
-            <button data-ng-if="!note.editing" data-ng-disabled="!note._id" data-ng-click="editCancel(note)">Edit</button>
-
-            <form name="{{'editing' + note._id}}" data-ng-if="note.editing" data-ng-submit="saveNote(note)">
-              <input type="text" data-ng-model="note.noteBody">
-              <button type="submit">Save Changes</button>
-              <button type="button" data-ng-click="editCancel(note)">Cancel</button>
-            </form>
-
-        </li>
-      </ul>
-    </main>
-
-    <script src="bundle.js"></script>
-  </body>
+<body data-ng-app="notesApp">
+  <div data-nyan></div>
+  <a data-ng-if="loggedIn()" href data-ng-click="logOut()">Hello {{username? '' + username : ''}}! Click here to logout</a>
+  <main data-ng-view>
+  </main>
+	<script src="bundle.js"></script>
+</body>
 </html>

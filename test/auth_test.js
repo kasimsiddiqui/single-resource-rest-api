@@ -54,10 +54,10 @@ describe('auth', function() {
           if (err) throw err;
           user.generateToken(function(err, token) {
             if (err) throw err;
-            this.token = token;
+            this.token = token; 
             done();
           }.bind(this));
-        }.bind(this));
+        }.bind(this)); 
       }.bind(this));
     });
 

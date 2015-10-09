@@ -6,8 +6,8 @@ var eatAuth = require(__dirname + '/../lib/eat_auth');
 
 var notesRoute = module.exports = exports = express.Router();
 
-notesRoute.get('/notes', function(req, res) {
-  Note.find({}, function(err, data) {
+notesRoute.get('/notes', jsonParser, eatAuth, function(req, res) {
+  Note.find({author: req.user.username}, function(err, data) {
     if (err) return handleError(err, res);
     res.json(data);
   });

@@ -70,4 +70,3 @@ ee.on('generateToken', function(req, res, user){
     res.json({token: token});
   });
 });
-

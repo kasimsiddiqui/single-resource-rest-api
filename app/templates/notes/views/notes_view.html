@@ -1,0 +1,23 @@
+<section data-ng-controller="NotesController" data-ng-init="getAll()">
+  <div data-nyan></div>
+
+  <div data-note-form save="createNote(note)"
+       data-note="newNote"
+       data-label-text="NFL Players"
+       data-button-text="Create New NFL Player">
+    </div>
+
+    <ul data-ng-repeat="note in notes">
+      <li>{{note.noteBody}}
+          <button data-ng-disabled="!note._id" data-ng-click="removeNote(note)">Delete</button>
+          <button data-ng-if="!note.editing" data-ng-disabled="!note._id" data-ng-click="editCancel(note)">Edit</button>
+
+          <form name="{{'editing' + note._id}}" data-ng-if="note.editing" data-ng-submit="saveNote(note)">
+            <input type="text" data-ng-model="note.noteBody">
+            <button type="submit">Save Changes</button>
+            <button type="button" data-ng-click="editCancel(note)">Cancel</button>
+          </form>
+
+      </li>
+    </ul>
+</section>
